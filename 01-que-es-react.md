@@ -1,4 +1,4 @@
-# ¿Que es React?
+# ¿Qué es React?
 
 * React es una librería de vistas de código abierto creada y mantenida por Facebook. Es una gran herramienta para hacer la interfaz de usuario (UI) de aplicaciones web modernas.
 
