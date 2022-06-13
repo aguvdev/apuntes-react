@@ -53,6 +53,19 @@ class Saludo extends React.Component {
 - Debe tener un método **render()** para retornar un elemento **_JSX_**.
 - Puede recibir valores si es necesario.
 
+## Método _render()_:
+- Método que retorna la estructura del componente en **_JSX_**.
+
+- Es el único método obligatorio para un componente de clase en **_React_**.
+
+```Javascript
+class NombreComponente extends React.Component {
+    render() {
+        return <p>Mi componente</p>
+    }
+}
+```
+
 ## _Estados (State)_:
 
 Representación en **_JS_** del conjunto de propiedades de un componente y sus valores actuales.
@@ -68,6 +81,174 @@ Anteriormente, usábamos componentes de clase para poder trabajar con "_estados_
 En versiones anteriores de React (_anteriores a 16.8_), **no** podíamos hacerlos en componentes funcionales.
 
 Ahora sí podemos asignar y actualizar el estado de un componente funcional en React con los **Hooks**.
+
+## ¿Son releveantes?
+La respuesta corta es: ¡Si!
+
+### **Claves**:
+
+> - "**No** hay planes para eliminar las clases de **_React_**".
+> - "**No** hay prisa por migrar a los **_Hooks_**".
+> - Pretendemos que **_Hooks_** cubra todos los casos de uso existentes para las clases, pero seguiremos soportando los componentes de clase en un futuro previsible".
+
+### **_props_**:
+Los componentes de clases también pueden recibir **_props_**.
+
+Para acceder a un **_prop_**:
+```Javascript
+this.props.nombreDelProp
+```
+
+Ejemplo:
+```Javascript
+class Saludo extends React.Component {
+    render() {
+        return <h1>¡Hola, {this.props.nombre}!</h1>;
+    }
+}
+```
+
+### **_this_** en Componentens de Clase:
+**_this_** se refiere al componente actual.
+
+### **Constructor**:
+Método usado para inicializar el estado de un componente de React.
+
+Es llamado automáticamente cuando se crea el componente.
+
+**Ejemplo**:
+```Javascript
+class Tarea extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {completada: true}
+    }
+
+    render() {
+        return <p>Mi tarea</p>
+    }
+}
+```
+- Debe llamara a **_super()_** para heredar todas las funciones de su componente "padre" (React.Component).
+
+### **_props_** en el Constructor:
+Si el componente tiene un método constructor y recibe props deben ser pasados al **_constructor_** y a **_super()_**.
+
+**Ejemplo**:
+```Javascript
+class Tarea extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <p>Mi tarea</p>
+    }
+}
+```
+
+### Estado en el **constructor**:
+El objeto "**_state_**" (estado) se inicializa en el **_constructor_**.
+
+**Ejemplo**:
+```Javascript
+class Tarea extends React.Component {
+
+    constructor() {
+        super();
+        /* --------------------------------------------- */
+        this.state = {completada: true}/* this es el objeto del state(estado), y a ese objeto le vamos el objeto inical: la propiedad {completada: true} */
+        /* --------------------------------------------- */
+    }
+
+    render() {
+        return <p>Mi tarea</p>
+    }
+}
+```
+Puede tener varias propiedades separadas por comas.
+
+**_Ejemplo_**:
+```Javascript
+class Tarea extends React.Component {
+
+    constructor(props) {
+        super(props);
+        /* ------------------ */
+        this.state = {
+            completada: true,
+            color: azul,
+            prioridad: 1
+        };
+        /* ------------------ */
+    }
+
+    render() {
+        return <p>Mi tarea</p>
+    }
+}
+```
+
+### Accediendo al **_state_**(estado):
+```Javascript
+this.state.propiedad
+```
+
+**_Ejemplos_**:
+```Javascript
+class Tarea extends React.Component {
+
+    constructor(props) {
+        super(props);
+        /* ------------------ */
+        this.state = {
+            completada: true, /* => this.state.completada */
+            color: azul, /* => this.state.color */
+            prioridad: 1 /* => this.state.propiedad */
+        };
+        /* ------------------ */
+    }
+
+    render() {
+        return <p>Mi tarea</p>
+    }
+}
+```
+
+**dentro de la clase**:
+```Javascript
+class Tarea extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            completada: true,
+            color: azul,
+            prioridad: 1
+        };
+    }
+
+    render() {
+        return <p>Mi tarea tiene prioridad: {this.state.prioridad}</p>
+    }
+}
+```
+
+### Actualizando el estado:
+Para actualizar una o más propiedades del objeto "**_state_**", se llama a **_this.setState()_**.
+Y se pasa como argumento un objeto con las propiedades que se van a actualizar y sus nuevos valores.
+
+```Javascript
+this.setState({
+    completada: false,
+    color: verde
+});
+```
+
+### Métodos de Ciclos de Vida:
+Métodos **especiales** de **_React_** usados para realizar **operaciones con componentes** en momentos específicos de su vida en el **DOM**.
 
 ---
 
